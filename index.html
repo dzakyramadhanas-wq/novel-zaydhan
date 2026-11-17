@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Zaydhan — Karya : Dzaky Ramadhan A.S</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display, Lora & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,500..800;1,500..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        reading: ['"Lora"', 'serif'],
+                    },
+                    colors: {
+                        paper: {
+                            light: '#FAF8F5',
+                            sepia: '#F4ECD8',
+                            dark: '#161618',
+                        },
+                        ink: {
+                            primary: '#1E1D1B',
+                            secondary: '#57534E',
+                            accent: '#9A3412', // Terracotta / Rust literary accent
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#FAF8F5] text-[#1E1D1B] font-sans antialiased selection:bg-amber-200 selection:text-amber-950">
+
+    <!-- ==================== NAVIGATION BAR ==================== -->
+    <header class="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-stone-200/80 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-stone-900 text-amber-50 flex items-center justify-center font-serif font-bold text-lg sm:text-xl shadow-sm group-hover:bg-amber-900 transition-colors">
+                    Z
+                </div>
+                <div>
+                    <span class="font-serif font-bold text-lg sm:text-xl tracking-tight text-stone-900 block leading-none">Novel Zaydhan</span>
+                    <span class="text-[11px] text-stone-500 font-medium tracking-wider uppercase">Dzaky Ramadhan A.S</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+                <a href="#beranda" class="hover:text-stone-950 transition-colors">Beranda</a>
+                <a href="#katalog" class="hover:text-stone-950 transition-colors">Koleksi Novel</a>
+                <a href="#penulis" class="hover:text-stone-950 transition-colors">Tentang Penulis</a>
+            </nav>
+
+            <!-- Action Button & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <button onclick="openReader(0)" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-stone-900 text-white text-xs sm:text-sm font-medium hover:bg-amber-900 transition-all shadow-sm cursor-pointer">
+                    <i class="fa-solid fa-book-open text-amber-300 text-xs"></i>
+                    <span>Baca Unggulan</span>
+                </button>
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Menu Navigasi" class="md:hidden p-2.5 rounded-xl text-stone-700 hover:bg-stone-200/70 transition-colors">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#FAF8F5] border-b border-stone-200 px-4 pt-2 pb-5 space-y-2 shadow-lg">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-stone-200/60">Beranda</a>
+            <a href="#katalog" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-stone-200/60">Koleksi Novel</a>
+            <a href="#penulis" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-stone-700 hover:bg-stone-200/60">Tentang Penulis</a>
+            <div class="pt-2">
+                <button onclick="toggleMobileMenu(); openReader(0);" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-stone-900 text-white text-sm font-medium">
+                    <i class="fa-solid fa-book-open text-amber-300"></i>
+                    <span>Mulai Membaca Sekarang</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION (HALAMAN UTAMA) ==================== -->
+    <section id="beranda" class="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 border-b border-stone-200/80">
+        <!-- Decorative Subtle Background Ornaments -->
+        <div class="absolute inset-0 pointer-events-none opacity-40">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-amber-200/40 blur-3xl"></div>
+            <div class="absolute bottom-0 -left-24 w-80 h-80 rounded-full bg-stone-300/40 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Literary Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-900/10 border border-amber-900/20 text-amber-950 text-xs sm:text-sm font-semibold tracking-wide mb-6">
+                <i class="fa-solid fa-feather-pointed text-amber-800"></i>
+                <span>Merangkai Kata, Menghidupkan Rasa</span>
+            </div>
+
+            <!-- Main Website Title -->
+            <h1 class="font-serif font-bold text-4xl sm:text-6xl lg:text-7xl text-stone-900 tracking-tight leading-[1.12] mb-4">
+                Novel Zaydhan
+            </h1>
+
+            <!-- Author Credit Subtitle -->
+            <p class="font-serif italic text-xl sm:text-2xl lg:text-3xl text-amber-900 font-medium mb-6">
+                Karya : Dzaky Ramadhan A.S
+            </p>
+
+            <!-- Decorative Divider -->
+            <div class="flex items-center justify-center gap-3 mb-7">
+                <span class="h-px w-12 bg-stone-300"></span>
+                <i class="fa-solid fa-diamond text-[10px] text-amber-800"></i>
+                <span class="h-px w-12 bg-stone-300"></span>
+            </div>
+
+            <!-- Inviting Description -->
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-stone-600 leading-relaxed mb-10">
+                Sebuah catatan tentang perjalanan, doa-doa yang diam-diam dilangitkan, serta kisah-kisah yang tumbuh dari sunyi. Mari duduk sejenak, baca pelan-pelan, dan temukan bagian dirimu di setiap halamannya.
+            </p>
+
+            <!-- Call-To-Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="openReader(0)" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-stone-900 text-white font-semibold text-sm sm:text-base hover:bg-amber-950 transition-all shadow-lg shadow-stone-900/15 flex items-center justify-center gap-3 cursor-pointer">
+                    <i class="fa-solid fa-book-open text-amber-300"></i>
+                    <span>Mulai Membaca</span>
+                </button>
+                <a href="#katalog" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-stone-800 border border-stone-300 font-semibold text-sm sm:text-base hover:bg-stone-100 hover:border-stone-400 transition-all flex items-center justify-center gap-3">
+                    <span>Jelajahi Karya</span>
+                    <i class="fa-solid fa-arrow-down text-xs text-stone-500"></i>
+                </a>
+            </div>
+
+            <!-- Quick Literary Stats -->
+            <div class="mt-14 pt-8 border-t border-stone-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+                <div>
+                    <p class="font-serif font-bold text-2xl sm:text-3xl text-stone-900">4</p>
+                    <p class="text-xs sm:text-sm text-stone-500 mt-0.5">Judul Novel</p>
+                </div>
+                <div class="border-x border-stone-200">
+                    <p class="font-serif font-bold text-2xl sm:text-3xl text-stone-900">68+</p>
+                    <p class="text-xs sm:text-sm text-stone-500 mt-0.5">Total Bab</p>
+                </div>
+                <div>
+                    <p class="font-serif font-bold text-2xl sm:text-3xl text-stone-900">100%</p>
+                    <p class="text-xs sm:text-sm text-stone-500 mt-0.5">Karya Orisinal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== KATALOG KOLEKSI NOVEL ==================== -->
+    <section id="katalog" class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-800 block mb-2">Pustaka Pilihan</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl text-stone-900">Koleksi Novel</h2>
+                <p class="text-stone-600 text-sm sm:text-base mt-2">Pilih naskah cerita untuk membaca sinopsis lengkap dan memulai bab pertama.</p>
+            </div>
+
+            <!-- Search Input -->
+            <div class="relative w-full md:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    oninput="filterNovels()" 
+                    placeholder="Cari judul novel..." 
+                    class="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-stone-300 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-800/30 focus:border-amber-800 transition-all"
+                >
+            </div>
+        </div>
+
+        <!-- Genre Filter Tabs -->
+        <div id="genreFilters" class="flex items-center gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar">
+            <button onclick="setGenre('Semua')" data-genre="Semua" class="genre-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-stone-900 text-white transition-all whitespace-nowrap cursor-pointer">
+                Semua Karya
+            </button>
+            <button onclick="setGenre('Fantasi')" data-genre="Fantasi" class="genre-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-stone-600 border border-stone-200 hover:border-stone-400 transition-all whitespace-nowrap cursor-pointer">
+                Fantasi & Epik
+            </button>
+            <button onclick="setGenre('Misteri')" data-genre="Misteri" class="genre-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-stone-600 border border-stone-200 hover:border-stone-400 transition-all whitespace-nowrap cursor-pointer">
+                Misteri & Thriller
+            </button>
+            <button onclick="setGenre('Romansa')" data-genre="Romansa" class="genre-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-stone-600 border border-stone-200 hover:border-stone-400 transition-all whitespace-nowrap cursor-pointer">
+                Romansa & Drama
+            </button>
+            <button onclick="setGenre('Fiksi Ilmiah')" data-genre="Fiksi Ilmiah" class="genre-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-stone-600 border border-stone-200 hover:border-stone-400 transition-all whitespace-nowrap cursor-pointer">
+                Fiksi Ilmiah
+            </button>
+        </div>
+
+        <!-- Novel Grid Container -->
+        <div id="novelGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <!-- Novel Cards will be dynamically rendered via JS -->
+        </div>
+
+        <!-- Empty State (if search yields no results) -->
+        <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-stone-200/80">
+            <div class="w-14 h-14 rounded-2xl bg-stone-100 text-stone-400 flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <h3 class="font-serif font-bold text-xl text-stone-800 mb-1">Naskah Tidak Ditemukan</h3>
+            <p class="text-sm text-stone-500 max-w-md mx-auto">Tidak ada novel yang cocok dengan kata kunci atau kategori yang Anda pilih.</p>
+            <button onclick="resetFilters()" class="mt-5 px-5 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-medium hover:bg-amber-900 transition-colors cursor-pointer">
+                Tampilkan Semua Novel
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== TENTANG PENULIS ==================== -->
+    <section id="penulis" class="py-16 sm:py-24 bg-stone-900 text-stone-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-stone-800/60 border border-stone-700/80 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-12">
+                    <!-- Author Monogram / Typographic Portrait -->
+                    <div class="shrink-0">
+                        <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-amber-700 via-amber-900 to-stone-950 border border-amber-500/30 flex flex-col items-center justify-center shadow-xl relative overflow-hidden">
+                            <span class="font-serif font-bold text-4xl sm:text-5xl text-amber-100 tracking-wider">DR</span>
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-amber-300/80 mt-1">Penulis</span>
+                        </div>
+                    </div>
+
+                    <!-- Author Bio & Quote -->
+                    <div class="text-center md:text-left flex-1">
+                        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-2">Tentang Penulis</span>
+                        <h2 class="font-serif font-bold text-2xl sm:text-4xl text-white mb-4">Dzaky Ramadhan A.S</h2>
+                        
+                        <p class="text-stone-300 text-sm sm:text-base leading-relaxed mb-6">
+                            Seorang pencerita dan penulis fiksi yang percaya bahwa setiap kata memiliki nyawa untuk menjembatani realitas dan imajinasi. Melalui <strong>Novel Zaydhan</strong>, Dzaky Ramadhan A.S menuangkan gagasan tentang kemanusiaan, teka-teki waktu, keajaiban dunia fantasi, serta perjalanan batin tokoh-tokoh yang lahir dari perenungan panjang.
+                        </p>
+
+                        <!-- Inspirational Quote -->
+                        <blockquote class="border-l-2 border-amber-500 pl-4 py-1 my-6 text-left bg-stone-900/50 rounded-r-xl p-4">
+                            <p class="font-serif italic text-amber-100/90 text-sm sm:text-base leading-relaxed">
+                                "Menulis novel bukan sekadar merangkai peristiwa di atas kertas, melainkan menciptakan rumah bagi jiwa-jiwa yang ingin dimengerti tanpa harus bersuara."
+                            </p>
+                            <footer class="text-xs text-stone-400 mt-2 font-medium">— Dzaky Ramadhan A.S</footer>
+                        </blockquote>
+
+                        <!-- Social & Contact Buttons -->
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
+                            <button onclick="showToast('Email penulis disalin: dzaky.ramadhan@novelzaydhan.id')" class="px-4 py-2.5 rounded-xl bg-amber-700 hover:bg-amber-600 text-white text-xs sm:text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer">
+                                <i class="fa-regular fa-envelope"></i>
+                                <span>Hubungi Penulis</span>
+                            </button>
+                            <button onclick="showToast('Membuka profil Instagram @dzakyramadhan.as')" class="px-4 py-2.5 rounded-xl bg-stone-700/80 hover:bg-stone-700 text-stone-200 text-xs sm:text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer">
+                                <i class="fa-brands fa-instagram"></i>
+                                <span>Instagram</span>
+                            </button>
+                            <button onclick="showToast('Membuka profil Wattpad / KaryaKarsa Dzaky Ramadhan A.S')" class="px-4 py-2.5 rounded-xl bg-stone-700/80 hover:bg-stone-700 text-stone-200 text-xs sm:text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-pen-nib"></i>
+                                <span>Jurnal Menulis</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-stone-950 text-stone-400 py-10 border-t border-stone-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="font-serif font-bold text-lg text-stone-200">Novel Zaydhan</p>
+                <p class="text-xs text-stone-500 mt-0.5">Karya : Dzaky Ramadhan A.S &bull; Hak Cipta Dilindungi Undang-Undang</p>
+            </div>
+            <div class="text-xs text-stone-500">
+                Dibuat dengan dedikasi untuk para pencinta sastra & fiksi Indonesia.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== INTERACTIVE READER MODAL ==================== -->
+    <div id="readerModal" class="fixed inset-0 z-50 hidden flex-col bg-[#FAF8F5] text-[#1E1D1B] transition-colors duration-300">
+        <!-- Reader Top Toolbar -->
+        <div id="readerHeader" class="h-16 border-b border-stone-200/80 px-4 sm:px-6 flex items-center justify-between gap-3 shrink-0 transition-colors">
+            <!-- Back / Close Reader -->
+            <button onclick="closeReader()" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-black/5 text-sm font-medium transition-colors cursor-pointer">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span class="hidden sm:inline">Kembali ke Katalog</span>
+            </button>
+
+            <!-- Novel & Chapter Info -->
+            <div class="text-center truncate px-2">
+                <h3 id="readerNovelTitle" class="font-serif font-bold text-sm sm:text-base truncate">Judul Novel</h3>
+                <p id="readerAuthorSub" class="text-[11px] opacity-70 truncate">Karya : Dzaky Ramadhan A.S</p>
+            </div>
+
+            <!-- Reader Controls (Theme & Font Size) -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <!-- Font Size Decrease/Increase -->
+                <div class="flex items-center border border-current/20 rounded-xl overflow-hidden">
+                    <button onclick="changeFontSize(-1)" title="Perkecil Huruf" class="px-2.5 py-1.5 text-xs font-bold hover:bg-black/5 transition-colors cursor-pointer">A-</button>
+                    <button onclick="changeFontSize(1)" title="Perbesar Huruf" class="px-2.5 py-1.5 text-xs font-bold hover:bg-black/5 border-l border-current/20 transition-colors cursor-pointer">A+</button>
+                </div>
+
+                <!-- Theme Switcher Dots -->
+                <div class="flex items-center gap-1.5 pl-1">
+                    <button onclick="setReaderTheme('light')" title="Mode Terang" class="w-6 h-6 rounded-full bg-[#FAF8F5] border-2 border-stone-400 shadow-sm cursor-pointer"></button>
+                    <button onclick="setReaderTheme('sepia')" title="Mode Sepia (Kertas)" class="w-6 h-6 rounded-full bg-[#F4ECD8] border-2 border-amber-700/50 shadow-sm cursor-pointer"></button>
+                    <button onclick="setReaderTheme('dark')" title="Mode Malam" class="w-6 h-6 rounded-full bg-[#161618] border-2 border-stone-600 shadow-sm cursor-pointer"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reader Body Container -->
+        <div class="flex-1 overflow-y-auto" id="readerScrollArea">
+            <div class="max-w-3xl mx-auto px-5 sm:px-8 py-8 sm:py-12">
+                
+                <!-- Chapter Selector Dropdown -->
+                <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-current/15">
+                    <div>
+                        <span id="readerGenreBadge" class="text-[11px] font-bold uppercase tracking-widest text-amber-700 block mb-1">Genre</span>
+                        <h2 id="readerChapterHeading" class="font-serif font-bold text-2xl sm:text-3xl">Bab 1: Judul Bab</h2>
+                    </div>
+
+                    <select id="chapterSelect" onchange="selectChapter(this.value)" class="px-3.5 py-2.5 rounded-xl border border-current/20 bg-transparent text-xs sm:text-sm font-medium focus:outline-none cursor-pointer">
+                        <!-- Chapters injected via JS -->
+                    </select>
+                </div>
+
+                <!-- Story Content Area -->
+                <article id="readerStoryContent" class="font-reading text-lg leading-[1.9] space-y-6">
+                    <!-- Paragraphs injected via JS -->
+                </article>
+
+                <!-- Chapter Navigation Footer -->
+                <div class="mt-14 pt-8 border-t border-current/15 flex items-center justify-between gap-4">
+                    <button id="prevChapterBtn" onclick="navigateChapter(-1)" class="px-5 py-3 rounded-xl border border-current/20 text-xs sm:text-sm font-medium hover:bg-black/5 disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        <span>Bab Sebelumnya</span>
+                    </button>
+
+                    <button id="nextChapterBtn" onclick="navigateChapter(1)" class="px-5 py-3 rounded-xl bg-amber-800 text-white text-xs sm:text-sm font-medium hover:bg-amber-700 disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center gap-2 cursor-pointer">
+                        <span>Bab Selanjutnya</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CUSTOM TOAST NOTIFICATION ==================== -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-stone-900 text-white px-4 py-3 rounded-xl shadow-xl border border-stone-700 text-xs sm:text-sm flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-check text-amber-400"></i>
+        <span id="toastMessage">Pesan notifikasi</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC & DATA ==================== -->
+    <script>
+        // Data Koleksi Novel Karya Dzaky Ramadhan A.S
+        const novelsData = [
+            {
+                id: 0,
+                title: "Lentera di Ufuk Zaydhan",
+                author: "Dzaky Ramadhan A.S",
+                genre: "Fantasi",
+                status: "Berlanjut",
+                totalChapters: 24,
+                readTime: "8 Menit / Bab",
+                coverGradient: "from-amber-900 via-stone-900 to-amber-950",
+                coverAccent: "text-amber-300",
+                coverIcon: "fa-compass",
+                synopsis: "Di negeri yang langitnya terbelah oleh kabut abadi, seorang penjaga menara tua menemukan lentera perak yang mampu memanggil ingatan para leluhur. Perjalanan melintasi batas kerajaan pun dimulai demi menyalakan kembali matahari yang hilang.",
+                chapters: [
+                    {
+                        title: "Bab 1: Kabut di Menara Selatan",
+                        content: [
+                            "Angin malam selalu membawa aroma garam dan abu dari balik dinding batu Zaydhan. Di puncak Menara Selatan, Arka menyulut sumbu lentera minyaknya untuk yang ketujuh ratus kalinya sejak musim dingin tak kunjung pergi.",
+                            "Orang-orang di lembah percaya bahwa langit kehilangan cahayanya karena sumpah yang dilanggar tiga abad silam. Namun bagi Arka, kegelapan itu terasa seperti tirai tebal yang sengaja diturunkan seseorang untuk menyembunyikan sesuatu di balik cakrawala.",
+                            "Malam itu, denting lonceng perunggu berbunyi tanpa tertiup angin. Di dasar anak tangga batu yang berlumut, tergeletak sebuah peti kayu berukir bintang delapan sudut—dan di dalamnya, sebuah lentera perak menyala dengan api biru yang dingin."
+                        ]
+                    },
+                    {
+                        title: "Bab 2: Bisikan Api Biru",
+                        content: [
+                            "Api biru itu tidak membakar kulit, melainkan menghangatkan ingatan yang nyaris beku. Saat jemari Arka menyentuh kaca lentera, bayangan kota kuno dengan menara-menara kristal berkelebat di pelupuk matanya.",
+                            "Ia mendengar suara langkah kaki mendekat dari balik kabut. Bukan langkah prajurit kerajaan, melainkan seseorang berjubah kelabu yang membawa peta lusuh bertuliskan nama Zaydhan di sudut kanannya.",
+                            "'Kau akhirnya menyalakannya,' ucap sosok itu pelan. 'Kini seluruh penjaga gerbang utara tahu bahwa pewaris lentera telah terbangun.'"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 1,
+                title: "Jejak Hujan di Stasiun Kertas",
+                author: "Dzaky Ramadhan A.S",
+                genre: "Romansa",
+                status: "Selesai",
+                totalChapters: 18,
+                readTime: "6 Menit / Bab",
+                coverGradient: "from-rose-950 via-stone-900 to-amber-950",
+                coverAccent: "text-rose-200",
+                coverIcon: "fa-envelope-open-text",
+                synopsis: "Setiap senja di peron nomor tiga, Nadira selalu meninggalkan sepucuk surat tanpa nama di bangku kayu stasiun. Hingga suatu hari, balasan tertulis di balik tiket kereta tua yang membawanya pada kisah masa lalu yang belum usai.",
+                chapters: [
+                    {
+                        title: "Bab 1: Peron Nomor Tiga",
+                        content: [
+                            "Hujan bulan November di kota kecil itu selalu turun tepat pukul lima sore, seolah memiliki jadwal keberangkatan sendiri seperti kereta terakhir menuju selatan.",
+                            "Nadira duduk di bangku kayu peron nomor tiga, menyelipkan amplop berwarna gading di antara celah sandaran kursi. Kebiasaan itu sudah berlangsung enam bulan sejak kepergian seseorang tanpa sempat mengucap pamit.",
+                            "Namun sore itu, ketika ia hendak beranjak, jemarinya menyentuh selembar kertas karton tebal—sebuah tiket kereta tahun 2019 dengan tulisan tinta hitam rapi di bagian belakangnya: 'Apakah hujan di sana masih sederas dulu?'"
+                        ]
+                    },
+                    {
+                        title: "Bab 2: Tinta di Balik Tiket",
+                        content: [
+                            "Jantung Nadira berdegup lebih kencang daripada deru lokomotif yang melintas. Ia memandangi sekeliling peron yang lengang, hanya ada seorang pria bertopi pet yang sedang melipat payung hitam di ujung koridor.",
+                            "Tulisan tangan itu begitu akrab. Lekukan huruf 'R' dan titik koma yang tegas adalah ciri khas yang pernah memenuhi buku catatan kuliahnya bertahun-tahun lalu.",
+                            "Keesokan harinya, Nadira datang tiga puluh menit lebih awal, membawa pena dan pertanyaan yang selama ini tertahan di tenggorokannya."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Arsip Rahasia Ruang 404",
+                author: "Dzaky Ramadhan A.S",
+                genre: "Misteri",
+                status: "Berlanjut",
+                totalChapters: 16,
+                readTime: "9 Menit / Bab",
+                coverGradient: "from-slate-900 via-zinc-900 to-neutral-950",
+                coverAccent: "text-sky-300",
+                coverIcon: "fa-key",
+                synopsis: "Sebagai pustakawan malam di gedung arsip tua, Damar menemukan satu bundel berkas kasus hilang yang tanggal kejadiannya justru tercatat tiga hari di masa depan. Sebuah teka-teki memaksanya berpacu melawan waktu.",
+                chapters: [
+                    {
+                        title: "Bab 1: Berkas dari Masa Depan",
+                        content: [
+                            "Pukul 01.15 dini hari adalah waktu paling sunyi di Gedung Arsip Nasional. Hanya suara dengung lampu neon dan detak jam dinding tua yang menemani Damar menyusun map-map berdebu.",
+                            "Di rak paling bawah lorong B, ia menemukan map merah marun tanpa nomor registrasi. Saat dibuka, terlampir laporan kepolisian lengkap dengan foto lokasi kejadian di jembatan kota.",
+                            "Damar mengerutkan kening saat membaca tanggal di sudut kanan atas dokumen tersebut. Tanggal itu bukanlah tahun lalu, melainkan hari Jumat pekan ini—tiga hari dari sekarang."
+                        ]
+                    },
+                    {
+                        title: "Bab 2: Panggilan Telepon Pukul Dua",
+                        content: [
+                            "Sebelum Damar sempat meletakkan berkas itu kembali, telepon analog di meja resepsionis berdering nyaring memecah keheningan gedung.",
+                            "Tidak ada nomor pemanggil di layar kecilnya. Ketika gagang telepon diangkat, hanya terdengar suara napas terengah dan bunyi rintik hujan yang menghantam kaca mobil.",
+                            "'Jangan biarkan kereta malam melintasi jembatan pada hari Jumat,' bisik suara di seberang sana sebelum sambungan terputus."
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Orbit Sunyi Cakrawala",
+                author: "Dzaky Ramadhan A.S",
+                genre: "Fiksi Ilmiah",
+                status: "Selesai",
+                totalChapters: 10,
+                readTime: "7 Menit / Bab",
+                coverGradient: "from-indigo-950 via-slate-900 to-teal-950",
+                coverAccent: "text-teal-300",
+                coverIcon: "fa-satellite",
+                synopsis: "Di tahun 2140, stasiun pemantau luar angkasa Nusantara-09 menangkap sinyal kode morse berbahasa Indonesia dari balik orbit Neptunus—padahal tidak ada misi berawak yang pernah dikirim sejauh itu.",
+                chapters: [
+                    {
+                        title: "Bab 1: Sinyal dari Balik Neptunus",
+                        content: [
+                            "Di ketinggian empat ratus kilometer di atas permukaan Bumi, keheningan ruang hampa terasa mutlak. Komandan Raka menatap grafik gelombang radio yang berdenyut teratur di layar monitor utama.",
+                            "Selama tiga tahun bertugas di Stasiun Nusantara-09, sinyal itu adalah anomali pertama yang tidak berasal dari satelit komunikasi maupun suar meteor.",
+                            "Setelah diterjemahkan oleh komputer kuantum, deretan titik dan garis itu membentuk tiga kata sederhana: 'KAMI MASIH MENUNGGU'."
+                        ]
+                    },
+                    {
+                        title: "Bab 2: Koordinat yang Terlupakan",
+                        content: [
+                            "Tim peneliti di Jakarta awalnya mengira sinyal tersebut hanyalah pantulan gema radio dari eksperimen dekade 2070-an yang gagal.",
+                            "Namun Raka menemukan pola pergeseran frekuensi yang menunjukkan bahwa sumber pemancar bergerak secara sadar menghindari sabuk asteroid.",
+                            "Di dalam arsip terenkripsi milik lembaga antariksa lama, Raka menemukan cetak biru pesawat eksplorasi rahasia bernama 'Zaydhan-I' yang dinyatakan hilang lima puluh tahun silam."
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // State Aplikasi
+        let currentGenre = 'Semua';
+        let currentNovelIndex = 0;
+        let currentChapterIndex = 0;
+        let currentFontSize = 18; // dalam px
+        let currentReaderTheme = 'light';
+
+        // Inisialisasi Halaman
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNovels();
+        });
+
+        // Toggle Menu Mobile
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Set Filter Genre
+        function setGenre(genre) {
+            currentGenre = genre;
+            document.querySelectorAll('.genre-btn').forEach(btn => {
+                if (btn.dataset.genre === genre) {
+                    btn.className = 'genre-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-stone-900 text-white transition-all whitespace-nowrap cursor-pointer';
+                } else {
+                    btn.className = 'genre-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white text-stone-600 border border-stone-200 hover:border-stone-400 transition-all whitespace-nowrap cursor-pointer';
+                }
+            });
+            filterNovels();
+        }
+
+        // Reset Filter & Pencarian
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            setGenre('Semua');
+        }
+
+        // Filter & Render Daftar Novel
+        function filterNovels() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filtered = novelsData.filter(novel => {
+                const matchGenre = currentGenre === 'Semua' || novel.genre === currentGenre;
+                const matchQuery = novel.title.toLowerCase().includes(query) || novel.synopsis.toLowerCase().includes(query);
+                return matchGenre && matchQuery;
+            });
+            renderNovels(filtered);
+        }
+
+        function renderNovels(list = novelsData) {
+            const grid = document.getElementById('novelGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (list.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = list.map(novel => `
+                <article class="group bg-white rounded-3xl border border-stone-200/90 overflow-hidden shadow-sm hover:shadow-xl hover:border-stone-300 transition-all duration-300 flex flex-col sm:flex-row">
+                    <!-- Esthetic Typographic Book Cover -->
+                    <div class="sm:w-44 lg:w-48 shrink-0 bg-gradient-to-br ${novel.coverGradient} p-5 flex flex-col justify-between text-white relative overflow-hidden min-h-[210px] sm:min-h-full">
+                        <div class="absolute -right-6 -bottom-6 text-7xl opacity-10">
+                            <i class="fa-solid ${novel.coverIcon}"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-sm ${novel.coverAccent}">
+                                ${novel.genre}
+                            </span>
+                        </div>
+                        <div class="my-4 relative z-10">
+                            <h3 class="font-serif font-bold text-xl leading-snug tracking-tight text-white group-hover:text-amber-200 transition-colors">
+                                ${novel.title}
+                            </h3>
+                            <div class="w-8 h-0.5 bg-amber-400/60 my-2.5"></div>
+                            <p class="text-[11px] text-stone-300 font-medium">Karya : ${novel.author}</p>
+                        </div>
+                        <div class="text-[10px] text-stone-400 uppercase tracking-wider">
+                            Novel Zaydhan
+                        </div>
+                    </div>
+
+                    <!-- Card Content -->
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <!-- Metadata Badges -->
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="inline-flex items-center gap-1.5 text-xs font-semibold ${novel.status === 'Selesai' ? 'text-emerald-700 bg-emerald-50 border-emerald-200' : 'text-amber-800 bg-amber-50 border-amber-200'} px-2.5 py-1 rounded-lg border">
+                                    <span class="w-1.5 h-1.5 rounded-full ${novel.status === 'Selesai' ? 'bg-emerald-600' : 'bg-amber-600'}"></span>
+                                    ${novel.status}
+                                </span>
+                                <span class="text-xs text-stone-500 font-medium">
+                                    <i class="fa-regular fa-file-lines mr-1"></i>${novel.totalChapters} Bab
+                                </span>
+                            </div>
+
+                            <!-- Title & Synopsis -->
+                            <h3 class="font-serif font-bold text-xl text-stone-900 mb-2 group-hover:text-amber-900 transition-colors">
+                                ${novel.title}
+                            </h3>
+                            <p class="text-sm text-stone-600 leading-relaxed line-clamp-3 mb-5">
+                                ${novel.synopsis}
+                            </p>
+                        </div>
+
+                        <!-- Bottom Action -->
+                        <div class="pt-4 border-t border-stone-100 flex items-center justify-between gap-3">
+                            <span class="text-xs text-stone-400">
+                                <i class="fa-regular fa-clock mr-1"></i>${novel.readTime}
+                            </span>
+                            <button onclick="openReader(${novel.id})" class="px-4 py-2.5 rounded-xl bg-stone-900 text-white text-xs sm:text-sm font-semibold hover:bg-amber-900 transition-colors flex items-center gap-2 cursor-pointer">
+                                <span>Baca Sekarang</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // ==================== FUNGSI MODE BACA (READER) ====================
+        function openReader(novelId, chapterIdx = 0) {
+            currentNovelIndex = novelId;
+            currentChapterIndex = chapterIdx;
+
+            const novel = novelsData[novelId];
+            document.getElementById('readerNovelTitle').textContent = novel.title;
+            document.getElementById('readerAuthorSub').textContent = `Karya : ${novel.author}`;
+            document.getElementById('readerGenreBadge').textContent = `${novel.genre} • ${novel.status}`;
+
+            // Isi Dropdown Daftar Bab
+            const chapterSelect = document.getElementById('chapterSelect');
+            chapterSelect.innerHTML = novel.chapters.map((chap, idx) => `
+                <option value="${idx}" class="text-stone-900 bg-white">${chap.title}</option>
+            `).join('');
+
+            loadChapterContent();
+
+            const modal = document.getElementById('readerModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReader() {
+            const modal = document.getElementById('readerModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function loadChapterContent() {
+            const novel = novelsData[currentNovelIndex];
+            const chapter = novel.chapters[currentChapterIndex];
+
+            document.getElementById('readerChapterHeading').textContent = chapter.title;
+            document.getElementById('chapterSelect').value = currentChapterIndex;
+
+            const contentContainer = document.getElementById('readerStoryContent');
+            contentContainer.style.fontSize = `${currentFontSize}px`;
+            contentContainer.innerHTML = chapter.content.map(paragraph => `
+                <p class="indent-8 text-justify">${paragraph}</p>
+            `).join('');
+
+            // Update status tombol navigasi bab
+            document.getElementById('prevChapterBtn').disabled = currentChapterIndex === 0;
+            document.getElementById('nextChapterBtn').disabled = currentChapterIndex >= novel.chapters.length - 1;
+
+            // Scroll ke atas area baca
+            document.getElementById('readerScrollArea').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectChapter(index) {
+            currentChapterIndex = parseInt(index, 10);
+            loadChapterContent();
+        }
+
+        function navigateChapter(direction) {
+            const novel = novelsData[currentNovelIndex];
+            const nextIdx = currentChapterIndex + direction;
+            if (nextIdx >= 0 && nextIdx < novel.chapters.length) {
+                currentChapterIndex = nextIdx;
+                loadChapterContent();
+            }
+        }
+
+        function changeFontSize(delta) {
+            const newSize = currentFontSize + delta * 2;
+            if (newSize >= 14 && newSize <= 26) {
+                currentFontSize = newSize;
+                document.getElementById('readerStoryContent').style.fontSize = `${currentFontSize}px`;
+                showToast(`Ukuran huruf: ${currentFontSize}px`);
+            }
+        }
+
+        function setReaderTheme(theme) {
+            currentReaderTheme = theme;
+            const modal = document.getElementById('readerModal');
+            const header = document.getElementById('readerHeader');
+
+            modal.classList.remove('bg-[#FAF8F5]', 'text-[#1E1D1B]', 'bg-[#F4ECD8]', 'text-[#3B2F2F]', 'bg-[#161618]', 'text-[#E5E5E7]');
+            header.classList.remove('border-stone-200/80', 'border-amber-900/15', 'border-stone-800');
+
+            if (theme === 'light') {
+                modal.classList.add('bg-[#FAF8F5]', 'text-[#1E1D1B]');
+                header.classList.add('border-stone-200/80');
+                showToast('Tema Baca: Mode Terang');
+            } else if (theme === 'sepia') {
+                modal.classList.add('bg-[#F4ECD8]', 'text-[#3B2F2F]');
+                header.classList.add('border-amber-900/15');
+                showToast('Tema Baca: Mode Sepia (Kertas)');
+            } else if (theme === 'dark') {
+                modal.classList.add('bg-[#161618]', 'text-[#E5E5E7]');
+                header.classList.add('border-stone-800');
+                showToast('Tema Baca: Mode Malam');
+            }
+        }
+
+        // ==================== NOTIFIKASI TOAST ====================
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Tutup modal baca dengan tombol Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('readerModal').classList.contains('hidden')) {
+                closeReader();
+            }
+        });
+    </script>
+</body>
+</html>
