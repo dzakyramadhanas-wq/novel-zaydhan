@@ -264,27 +264,22 @@
                     </div>
 
                     <!-- Author Bio & Quote -->
-                    <div class="text-center md:text-left flex-1">
-                        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-2">Tentang
-                            Penulis</span>
-                        <h2 class="font-serif font-bold text-2xl sm:text-4xl text-white mb-4">Dzaky Ramadhan A.S</h2>
+<div class="text-center md:text-left flex-1">
+    <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-2">Tentang Penulis</span>
+    <h2 class="font-serif font-bold text-2xl sm:text-4xl text-white mb-4">Dzaky Ramadhan A.S</h2>
 
-                        <p class="text-stone-300 text-sm sm:text-base leading-relaxed mb-6">
-                            Seorang pencerita dan penulis fiksi yang percaya bahwa setiap kata memiliki nyawa untuk
-                            menjembatani realitas dan imajinasi. Melalui <strong>Novel Zaydhan</strong>, Dzaky Ramadhan
-                            A.S menuangkan gagasan tentang kemanusiaan, teka-teki waktu, keajaiban dunia fantasi, serta
-                            perjalanan batin tokoh-tokoh yang lahir dari perenungan panjang.
-                        </p>
+    <p class="text-stone-300 text-sm sm:text-base leading-relaxed mb-6">
+        Seseorang yang percaya bahwa setiap langkah kaki, hening malam, dan pertemuan tak sengaja selalu menyimpan cerita yang layak untuk dijaga. Melalui <strong>Novel Zaydhan</strong>, Dzaky Ramadhan A.S merangkai fragmen-fragmen rasa, doa-doa yang diam-diam dilangitkan, serta perjalanan panjang hati manusia dalam mencari makna pulang—berharap setiap aksara yang tertulis mampu menjadi teman duduk paling hangat bagi siapa saja yang membacanya.
+    </p>
 
-                        <!-- Inspirational Quote -->
-                        <blockquote
-                            class="border-l-2 border-amber-500 pl-4 py-1 my-6 text-left bg-stone-900/50 rounded-r-xl p-4">
-                            <p class="font-serif italic text-amber-100/90 text-sm sm:text-base leading-relaxed">
-                                "Menulis novel bukan sekadar merangkai peristiwa di atas kertas, melainkan menciptakan
-                                rumah bagi jiwa-jiwa yang ingin dimengerti tanpa harus bersuara."
-                            </p>
-                            <footer class="text-xs text-stone-400 mt-2 font-medium">— Dzaky Ramadhan A.S</footer>
-                        </blockquote>
+    <!-- Inspirational Quote -->
+    <blockquote
+        class="border-l-2 border-amber-500 pl-4 py-1 my-6 text-left bg-stone-900/50 rounded-r-xl p-4">
+        <p class="font-serif italic text-amber-100/90 text-sm sm:text-base leading-relaxed">
+            "Barangkali kita tidak pernah benar-benar kehabisan kata, hanya saja ada beberapa rasa yang terlalu luas jika diucap begitu saja—maka cerita dipilih menjadi rumah paling tenang untuk menyimpannya."
+        </p>
+        <footer class="text-xs text-stone-400 mt-2 font-medium">— Dzaky Ramadhan A.S</footer>
+    </blockquote>
 
                         <!-- Social & Contact Buttons -->
                         <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
@@ -555,8 +550,7 @@
                 coverGradient: "from-emerald-950 via-stone-900 to-teal-950",
                 coverAccent: "text-emerald-300",
                 coverIcon: "fa-mountain",
-                synopsis: "Di antara dinginnya kabut sabana dan langkah-langkah menuju ketinggian 3153 mdpl, dua hati yang sempat asing dipertemukan kembali oleh jalur pendakian yang sama—membuktikan bahwa sejauh apa pun jarak membentang, pulang selalu punya jalannya sendiri.",
-                chapters: []
+                synopsis: "Di titik ketika seseorang baru saja memberanikan diri membuka jalan baru dalam hidupnya, semesta justru mempertemukannya dengan sosok yang kelak menjadi tujuan terakhirnya. Dari langkah pertama menapaki jalur berbatu Gunung Sindoro menuju ketinggian 3153 mdpl, di antara dinginnya kabut dan doa-doa yang diam-diam dilangitkan, sebuah kisah perjalanan baru pun resmi dimulai.",
             }
         ];
 
@@ -658,12 +652,18 @@
                             </div>
 
                             <!-- Title & Synopsis -->
-                            <h3 class="font-serif font-bold text-xl text-stone-900 mb-2 group-hover:text-amber-900 transition-colors">
-                                ${novel.title}
-                            </h3>
-                            <p class="text-sm text-stone-600 leading-relaxed line-clamp-3 mb-5">
-                                ${novel.synopsis}
-                            </p>
+<h3 class="font-serif font-bold text-xl text-stone-900 mb-2 group-hover:text-amber-900 transition-colors">
+    ${novel.title}
+</h3>
+<div class="mb-5">
+    <p id="synopsis-${novel.id}" class="text-sm text-stone-600 leading-relaxed line-clamp-3">
+        ${novel.synopsis}
+    </p>
+    <button onclick="toggleSynopsis(${novel.id}, this)" class="text-xs font-semibold text-amber-800 hover:text-amber-950 mt-1.5 inline-flex items-center gap-1 cursor-pointer">
+        <span>Baca Selengkapnya</span>
+        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+    </button>
+</div>
                         </div>
 
                         <!-- Bottom Action -->
@@ -784,6 +784,20 @@
                 showToast('Tema Baca: Mode Malam');
             }
         }
+
+        // Fungsi untuk membuka/menutup sinopsis lengkap
+function toggleSynopsis(novelId, btnElement) {
+    const synopsisEl = document.getElementById(`synopsis-${novelId}`);
+    const isClamped = synopsisEl.classList.contains('line-clamp-3');
+
+    if (isClamped) {
+        synopsisEl.classList.remove('line-clamp-3');
+        btnElement.innerHTML = '<span>Sembunyikan</span> <i class="fa-solid fa-chevron-up text-[10px]"></i>';
+    } else {
+        synopsisEl.classList.add('line-clamp-3');
+        btnElement.innerHTML = '<span>Baca Selengkapnya</span> <i class="fa-solid fa-chevron-down text-[10px]"></i>';
+    }
+}
 
         // ==================== NOTIFIKASI TOAST ====================
         let toastTimeout;
