@@ -572,27 +572,27 @@ coverImage: "orbitzaky.jpg",
         let currentFontSize = 18; // dalam px
         let currentReaderTheme = 'light';
 
-        const COUNTER_NAMESPACE = 'novel-zaydhan-dzaky-as';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwi95874hloFHwlmLk26OlkWp0br4-IZVxZVWynxq-lqwsFmURtlmRtFb9wfcQUA6s7/exec';
 
-        // Muat jumlah pembaca global dari server CounterAPI
+        // Muat jumlah pembaca global dari Google Apps Script
         async function loadGlobalViews() {
-            await Promise.all(
-                novelsData.map(async (novel) => {
-                    try {
-                        const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/novel-${novel.id}`);
-                        if (res.ok) {
-                            const data = await res.json();
-                            novel.views = data.count || 0;
+            try {
+                const res = await fetch(`${APPS_SCRIPT_URL}?action=get`);
+                if (res.ok) {
+                    const data = await res.json();
+                    novelsData.forEach(novel => {
+                        if (data[novel.id] !== undefined) {
+                            novel.views = data[novel.id];
                             const viewEl = document.getElementById(`views-count-${novel.id}`);
                             if (viewEl) {
                                 viewEl.textContent = novel.views;
                             }
                         }
-                    } catch (err) {
-                        console.warn(`Gagal memuat jumlah pembaca novel ${novel.id}:`, err);
-                    }
-                })
-            );
+                    });
+                }
+            } catch (err) {
+                console.warn('Gagal memuat jumlah pembaca:', err);
+            }
         }
 
         // Inisialisasi Halaman
@@ -756,12 +756,12 @@ coverImage: "orbitzaky.jpg",
                 viewEl.textContent = novel.views;
             }
 
-            // Kirim penambahan +1 ke server CounterAPI agar sinkron di semua perangkat
-            fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/novel-${novelId}/up`)
+            // Kirim penambahan +1 ke server Google Apps Script agar sinkron di semua perangkat
+            fetch(`${APPS_SCRIPT_URL}?action=hit&id=${novelId}`)
                 .then(res => res.ok ? res.json() : null)
                 .then(data => {
-                    if (data && typeof data.count === 'number') {
-                        novel.views = data.count;
+                    if (data && typeof data.views === 'number') {
+                        novel.views = data.views;
                         const updatedEl = document.getElementById(`views-count-${novelId}`);
                         if (updatedEl) {
                             updatedEl.textContent = novel.views;
