@@ -423,6 +423,7 @@
                 genre: "Fantasi",
                 status: "Berlanjut",
                 totalChapters: 24,
+                views: 0,
                 readTime: "8 Menit / Bab",
                 coverGradient: "from-amber-900 via-stone-900 to-amber-950",
                 coverAccent: "text-amber-300",
@@ -455,6 +456,7 @@
                 genre: "Romansa",
                 status: "Berlanjut",
                 totalChapters: 18,
+                views: 0,
                 readTime: "6 Menit / Bab",
                 coverGradient: "from-rose-950 via-stone-900 to-amber-950",
                 coverAccent: "text-rose-200",
@@ -487,6 +489,7 @@
                 genre: "Misteri",
                 status: "Berlanjut",
                 totalChapters: 16,
+                views: 0,
                 readTime: "9 Menit / Bab",
                 coverGradient: "from-slate-900 via-zinc-900 to-neutral-950",
                 coverAccent: "text-sky-300",
@@ -519,6 +522,7 @@
                 genre: "Fiksi Ilmiah",
                 status: "Berlanjut",
                 totalChapters: 10,
+                views: 0,
                 readTime: "7 Menit / Bab",
                 coverGradient: "from-indigo-950 via-slate-900 to-teal-950",
                 coverAccent: "text-teal-300",
@@ -551,6 +555,7 @@ coverImage: "orbitzaky.jpg",
                 genre: "Romansa",
                 status: "Akan Datang",
                 totalChapters: 0,
+                views: 0,
                 readTime: "Segera Hadir",
                 coverGradient: "from-emerald-950 via-stone-900 to-teal-950",
                 coverAccent: "text-emerald-300",
@@ -567,8 +572,19 @@ coverImage: "orbitzaky.jpg",
         let currentFontSize = 18; // dalam px
         let currentReaderTheme = 'light';
 
+        // Muat data jumlah pembaca yang tersimpan di browser
+        function loadSavedViews() {
+            const savedViews = JSON.parse(localStorage.getItem('novelZaydhanViews') || '{}');
+            novelsData.forEach(novel => {
+                if (savedViews[novel.id] !== undefined) {
+                    novel.views = savedViews[novel.id];
+                }
+            });
+        }
+
         // Inisialisasi Halaman
         document.addEventListener('DOMContentLoaded', () => {
+            loadSavedViews();
             renderNovels();
         });
 
@@ -688,9 +704,15 @@ coverImage: "orbitzaky.jpg",
 
                         <!-- Bottom Action -->
 <div class="pt-4 border-t border-stone-100 flex items-center justify-between gap-3">
-    <span class="text-xs font-medium text-stone-500">
-        <i class="fa-solid ${novel.chapters.length === 0 ? 'fa-hourglass-half text-sky-700' : 'fa-book-open text-amber-700'} mr-1.5"></i>${novel.chapters.length === 0 ? 'Belum Rilis' : novel.chapters.length + ' Bab'}
-    </span>
+    <div class="flex items-center gap-3 text-xs font-medium text-stone-500">
+        <span>
+            <i class="fa-solid ${novel.chapters.length === 0 ? 'fa-hourglass-half text-sky-700' : 'fa-book-open text-amber-700'} mr-1.5"></i>${novel.chapters.length === 0 ? 'Belum Rilis' : novel.chapters.length + ' Bab'}
+        </span>
+        <span class="text-stone-300">&bull;</span>
+        <span title="Jumlah Pembaca">
+            <i class="fa-regular fa-eye mr-1 text-stone-400"></i><span id="views-count-${novel.id}">${novel.views}</span>
+        </span>
+    </div>
     ${novel.chapters.length === 0 
         ? `<button onclick="showToast('Naskah &quot;${novel.title}&quot; akan segera dirilis!')" class="px-4 py-2.5 rounded-xl bg-stone-200 text-stone-600 text-xs sm:text-sm font-semibold hover:bg-stone-300 transition-colors flex items-center gap-2 cursor-pointer">
             <i class="fa-regular fa-bell text-xs"></i>
@@ -713,6 +735,18 @@ coverImage: "orbitzaky.jpg",
             currentChapterIndex = chapterIdx;
 
             const novel = novelsData[novelId];
+
+            // Tambah jumlah pembaca +1 dan simpan ke localStorage
+            novel.views = (novel.views || 0) + 1;
+            const savedViews = JSON.parse(localStorage.getItem('novelZaydhanViews') || '{}');
+            savedViews[novelId] = novel.views;
+            localStorage.setItem('novelZaydhanViews', JSON.stringify(savedViews));
+
+            const viewEl = document.getElementById(`views-count-${novelId}`);
+            if (viewEl) {
+                viewEl.textContent = novel.views;
+            }
+
             document.getElementById('readerNovelTitle').textContent = novel.title;
             document.getElementById('readerAuthorSub').textContent = `Karya : ${novel.author}`;
             document.getElementById('readerGenreBadge').textContent = `${novel.genre} • ${novel.status}`;
