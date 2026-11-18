@@ -572,20 +572,33 @@ coverImage: "orbitzaky.jpg",
         let currentFontSize = 18; // dalam px
         let currentReaderTheme = 'light';
 
-        // Muat data jumlah pembaca yang tersimpan di browser
-        function loadSavedViews() {
-            const savedViews = JSON.parse(localStorage.getItem('novelZaydhanViews') || '{}');
-            novelsData.forEach(novel => {
-                if (savedViews[novel.id] !== undefined) {
-                    novel.views = savedViews[novel.id];
-                }
-            });
+        const COUNTER_NAMESPACE = 'novel-zaydhan-dzaky-as';
+
+        // Muat jumlah pembaca global dari server CounterAPI
+        async function loadGlobalViews() {
+            await Promise.all(
+                novelsData.map(async (novel) => {
+                    try {
+                        const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/novel-${novel.id}`);
+                        if (res.ok) {
+                            const data = await res.json();
+                            novel.views = data.count || 0;
+                            const viewEl = document.getElementById(`views-count-${novel.id}`);
+                            if (viewEl) {
+                                viewEl.textContent = novel.views;
+                            }
+                        }
+                    } catch (err) {
+                        console.warn(`Gagal memuat jumlah pembaca novel ${novel.id}:`, err);
+                    }
+                })
+            );
         }
 
         // Inisialisasi Halaman
         document.addEventListener('DOMContentLoaded', () => {
-            loadSavedViews();
             renderNovels();
+            loadGlobalViews();
         });
 
         // Toggle Menu Mobile
@@ -736,16 +749,26 @@ coverImage: "orbitzaky.jpg",
 
             const novel = novelsData[novelId];
 
-            // Tambah jumlah pembaca +1 dan simpan ke localStorage
+            // Tambah tampilan angka secara instan di layar pembaca
             novel.views = (novel.views || 0) + 1;
-            const savedViews = JSON.parse(localStorage.getItem('novelZaydhanViews') || '{}');
-            savedViews[novelId] = novel.views;
-            localStorage.setItem('novelZaydhanViews', JSON.stringify(savedViews));
-
             const viewEl = document.getElementById(`views-count-${novelId}`);
             if (viewEl) {
                 viewEl.textContent = novel.views;
             }
+
+            // Kirim penambahan +1 ke server CounterAPI agar sinkron di semua perangkat
+            fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/novel-${novelId}/up`)
+                .then(res => res.ok ? res.json() : null)
+                .then(data => {
+                    if (data && typeof data.count === 'number') {
+                        novel.views = data.count;
+                        const updatedEl = document.getElementById(`views-count-${novelId}`);
+                        if (updatedEl) {
+                            updatedEl.textContent = novel.views;
+                        }
+                    }
+                })
+                .catch(err => console.warn('Gagal menyinkronkan jumlah pembaca:', err));
 
             document.getElementById('readerNovelTitle').textContent = novel.title;
             document.getElementById('readerAuthorSub').textContent = `Karya : ${novel.author}`;
